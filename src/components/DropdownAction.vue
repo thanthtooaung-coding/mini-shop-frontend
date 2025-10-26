@@ -93,7 +93,7 @@ const confirmDelete = () => {
           </DropdownMenuItem>
 
           <DropdownMenuSeparator
-            v-if="action.label === 'Edit' && actions.some((a) => a.deleteDialog?.visible)"
+            v-if="action.label === 'Edit' && actions.some((a) => a.deleteDialog && a.visible)"
           />
         </template>
       </DropdownMenuContent>

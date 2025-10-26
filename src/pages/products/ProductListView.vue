@@ -47,14 +47,14 @@ const sortedAndFilteredData = computed(() => {
 
   // 1. Filter
   const lowerSearch = searchTerm.value.toLowerCase()
-  let filtered = productsResponse.value.filter(
+  let filtered = (productsResponse.value ?? []).filter(
     (product) =>
       product.name.toLowerCase().includes(lowerSearch) ||
       product.sku.toLowerCase().includes(lowerSearch),
   )
 
   // 2. Sort
-  if (sorting.value.length > 0) {
+  if (sorting.value.length > 0 && sorting.value[0]) {
     const sortKey = sorting.value[0].id as keyof ProductDto
     const sortDesc = sorting.value[0].desc
     filtered = [...filtered].sort((a, b) => {

@@ -63,7 +63,7 @@ const onSubmit = handleSubmit(async (values) => {
     error.value = err.response?.data?.message || err.message || 'Registration failed'
     toast({
       title: 'Registration Failed',
-      description: error.value,
+      description: error.value ?? undefined,
       variant: 'destructive',
     })
   }

@@ -82,8 +82,13 @@ const handlePageChange = (page: number) => {
   }
 }
 
-const handlePageSizeChange = (size: string) => {
-  emits('page-size-changed', Number(size))
+const handlePageSizeChange = (size: unknown) => {
+  if (
+    size !== null &&
+    (typeof size === 'string' || typeof size === 'number' || typeof size === 'bigint')
+  ) {
+    emits('page-size-changed', Number(size))
+  }
 }
 
 const handleRowClick = (row: TData) => {
@@ -167,7 +172,7 @@ const paginationItems = computed(() => {
         <span class="text-sm font-medium">Rows per page</span>
         <Select :model-value="String(rowsPerPage)" @update:model-value="handlePageSizeChange">
           <SelectTrigger class="w-20 h-9">
-            <SelectValue :placeholder="rowsPerPage" />
+            <SelectValue :placeholder="String(rowsPerPage)" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem v-for="size in [10, 20, 50]" :key="size" :value="String(size)">

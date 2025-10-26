@@ -202,7 +202,7 @@ const getHeaderRoutePath = () => {
 
       <ProductForm
         v-else-if="isCreate || isEdit"
-        :product-data="isEdit ? productData : null"
+        :product-data="isEdit ? productData || null : null"
         :is-submitting="createMutation.isPending.value || updateMutation.isPending.value"
         @submit="isCreate ? handleCreateSubmit($event) : handleUpdateSubmit($event)"
         @cancel="handleCancel"
@@ -210,7 +210,7 @@ const getHeaderRoutePath = () => {
 
       <ProductInfo
         v-else-if="isView"
-        :product-data="productData"
+        :product-data="productData || null"
         :is-loading="isLoadingProduct"
         :is-error="isErrorProduct"
         @edit="switchToEditMode"

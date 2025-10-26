@@ -88,7 +88,6 @@ const { toast } = useToast()
 const showPassword = ref(false)
 const error = ref<string | null>(null)
 
-// --- Form Validation Schema ---
 const formSchema = toTypedSchema(
   z.object({
     username: z.string().min(1, 'Username is required'),
@@ -119,7 +118,7 @@ const onSubmit = handleSubmit(async (values) => {
     error.value = err.message || 'Invalid username or password'
     toast({
       title: 'Login Failed',
-      description: error.value,
+      description: error.value ?? undefined,
       variant: 'destructive',
     })
   }

@@ -53,20 +53,13 @@ const formSchema = toTypedSchema(
     name: z.string().min(1, 'Name is required'),
     sku: z.string().min(1, 'SKU is required'),
     description: z.string().optional(),
-    costPrice: z.coerce
-      .number({ invalid_type_error: 'Must be a number' })
-      .min(0, 'Cost price cannot be negative'),
-    sellingPrice: z.coerce
-      .number({ invalid_type_error: 'Must be a number' })
-      .min(0, 'Selling price cannot be negative'),
+    costPrice: z.coerce.number().min(0, 'Cost price cannot be negative'),
+    sellingPrice: z.coerce.number().min(0, 'Selling price cannot be negative'),
     quantity: z.coerce
-      .number({ invalid_type_error: 'Must be a number' })
+      .number()
       .int('Quantity must be a whole number')
       .min(0, 'Quantity cannot be negative'),
-    categoryId: z.coerce.number({
-      required_error: 'Category is required',
-      invalid_type_error: 'Category is required',
-    }),
+    categoryId: z.coerce.number().min(1, 'Category is required'),
   }),
 )
 
